@@ -36,9 +36,10 @@ while True:
     #显示结果
     cv.imshow('output',frame)
     cv.imshow('output2',hsv)
-    #键入‘q’以退出
-    if cv.waitKey(20) & 0xff ==ord('q'):
+    #键入‘Esc’以退出
+    if cv.waitKey(20) & 0xff ==27:
         break
 #释放内存
 capture.release()
 cv.destroyAllWindows()
+# 2023.1.12
