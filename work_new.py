@@ -23,13 +23,14 @@ while True:
     """         cv.putText(frame,'red',(10,400),font,4,(0,0,0),5,cv.LINE_AA)
         cv.putText(frame,'yellow',(10,400),font,4,(0,0,0),5,cv.LINE_AA)
         cv.putText(frame,'green',(10,400),font,4,(0,0,0),5,cv.LINE_AA) """
-        
-
+    number = hsv[(1,2)]
+    print(type(number))
+    print(number)
     #显示结果
     cv.imshow('output',frame)
     cv.imshow('output2',hsv)
-    #键入‘q’以退出
-    if cv.waitKey(20) & 0xff ==ord('q'):
+    #键入‘Esc’以退出
+    if cv.waitKey(20) & 0xff == 27:
         break
 #释放内存
 capture.release()

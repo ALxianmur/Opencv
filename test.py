@@ -6,23 +6,34 @@ capture = cv.VideoCapture("./video/example.mp4")
 #导入视频
 while 1:
     ret,frame = capture.read()
-  
+
     #RGB转HSV
     bridge1 = cv.cvtColor(frame,cv.COLOR_RGB2HSV)
 
-    #高斯滤波去噪
-    bridge2 = cv.GaussianBlur(bridge1,(15,15),0)
+    #RGB转GRAY
+    bridge2 = cv.cvtColor(frame,cv.COLOR_RGB2GRAY)
 
-    #统计像素点数量
-    H,S,V =cv.split(bridge2)
-    (minVal, maxVal, minLoc, maxLoc) = cv.minMaxLoc(H)
-    bridge2 = cv.GaussianBlur(bridge1,(5,5),0)
-    cv.circle(bridge2, minLoc, 20, (255, 0, 0), 2)
+    #高斯滤波去噪
+    frame = cv.medianBlur(bridge2,7)
+
+    #霍夫变换
+    
+    circle = cv.HoughCircles(bridge2, cv.HOUGH_GRADIENT, 1, 50,param1=100, param2=100, minRadius=0, maxRadius=1000)
+    print(circle)
+
+    # 遍历矩阵的每一行的数据
+    for i in circle[0, :]:  
+    # 绘制圆形
+     cv.circle(frame, (int(i[0]), int(i[1])), int(i[2]), (255, 0, 0), 10)
+    # 绘制圆心
+     cv.circle(frame, (int(i[0]), int(i[1])), 10, (255, 0, 0), -1)
+          
     #创建窗口
     cv.namedWindow("output",0)
 
     #显示结果
     cv.imshow("output",frame)
+
     #控制台显示
 #     print("red")
 #     print("green")

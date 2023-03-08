@@ -37,15 +37,16 @@ while True:
     for x in [i[0]-i[2],i[0]+i[2]]:
             for y in [i[1]-i[2],i[1]+i[2]]:   
                 counter = frame[(x,y)]
-                if (max(counter)-counter[0]):
+                print(counter)
+                if (counter[0]>156)&(counter[0]<180):
                   counter_red =counter_red+1 
-                if (max(counter)-counter[1]):
+                if (counter[1]>35)&(counter[1]<77):
                   counter_green =counter_green+ 1
-                if (max(counter)-counter[2]):
+                if (counter[1]>26)&(counter[1]<34):
                   counter_yellow =counter_yellow+ 1
 
     #添加描述文字以及判断条件
-    number = [counter_red ,counter_green ,counter_yellow] 
+    number = [counter_red ,counter_yellow ,counter_green] 
     print(number)
     font = cv.FONT_HERSHEY_SIMPLEX
     if max(number)==number[0]:
